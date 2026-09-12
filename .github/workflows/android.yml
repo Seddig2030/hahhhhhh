@@ -34,10 +34,12 @@ jobs:
           python3 -m pip install --upgrade pip setuptools wheel
           python3 -m pip install "cython<3.0.0" buildozer
 
+      - name: Clean old build cache
+        run: |
+          rm -rf .buildozer
+
       - name: Build APK with Buildozer
         run: |
-          # مسح الكاش القديم لتجنب الاعتماد على cpython-314 المخبأ سابقاً
-          buildozer android clean
           yes | buildozer -v android debug
 
       - name: Upload APK
